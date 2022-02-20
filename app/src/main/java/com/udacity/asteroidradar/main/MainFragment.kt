@@ -28,6 +28,10 @@ class MainFragment : Fragment() {
         )[MainViewModel::class.java]
     }
 
+    private val asteroidAdapter = AsteroidAdapter(AsteroidAdapter.AsteroidOnClickListener {
+        viewModel.onAsteroidClicked(it)
+    })
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,11 +41,16 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.asteroidRecycler.adapter = asteroidAdapter
 
         setHasOptionsMenu(true)
 
         // initialize observers
         viewModel.pictureOfDay.observe(viewLifecycleOwner) { setPictureOfDay(it) }
+        viewModel.asteroids.observe(viewLifecycleOwner) {
+            Log.d(TAG, "Number of observed items: ${it?.count()}")
+            asteroidAdapter.submitList(it)
+        }
 
         return binding.root
     }
