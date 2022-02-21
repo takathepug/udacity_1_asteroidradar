@@ -63,7 +63,4 @@ class MainViewModel(
         }
     }
 
-    fun onAsteroidClicked(clickedAsteroid: Asteroid) {
-        Log.d(TAG, "Item clicked: $clickedAsteroid")
-    }
 }

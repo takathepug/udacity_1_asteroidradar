@@ -5,8 +5,8 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
-import com.udacity.asteroidradar.EventObserver
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
@@ -15,7 +15,7 @@ import com.udacity.asteroidradar.model.PictureOfDay
 class MainFragment : Fragment() {
     private val TAG: String = javaClass.simpleName
 
-    lateinit var binding: FragmentMainBinding
+    private lateinit var binding: FragmentMainBinding
 
     private val viewModel: MainViewModel by lazy {
         val activity = requireNotNull(this.activity) {
@@ -29,7 +29,8 @@ class MainFragment : Fragment() {
     }
 
     private val asteroidAdapter = AsteroidAdapter(AsteroidAdapter.AsteroidOnClickListener {
-        viewModel.onAsteroidClicked(it)
+        Log.d(TAG, "Item clicked: $it")
+        findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
     })
 
     override fun onCreateView(
