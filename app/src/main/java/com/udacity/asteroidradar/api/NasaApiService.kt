@@ -1,6 +1,6 @@
 package com.udacity.asteroidradar.api
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+//import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.Constants.BASE_URL
@@ -47,7 +47,6 @@ object NasaApi {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(okHttpClient)
 
     val retrofitService:NasaApiService by lazy {

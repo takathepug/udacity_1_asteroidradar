@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar
 
-import android.provider.Settings.Global.getString
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -23,6 +22,11 @@ fun bindAsteroidContentDescription(imageView: ImageView, isHazardous: Boolean) {
         imageView.contentDescription =
             imageView.context.getString(R.string.not_hazardous_asteroid_image)
     }
+}
+
+@BindingAdapter("imageOfTheDayContentDescription")
+fun bindImageOfTheDayContentDescription(imageView: ImageView, title:String) {
+    imageView.context.getString(R.string.nasa_picture_of_day_content_description_format, title)
 }
 
 @BindingAdapter("asteroidStatusImage")

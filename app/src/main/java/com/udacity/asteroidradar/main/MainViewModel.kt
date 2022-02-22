@@ -23,6 +23,7 @@ class MainViewModel(
     val pictureOfDay: LiveData<PictureOfDay>
         get() = _pictureOfDay
 
+    // initial asteroids are all obtained from API via worker
     private val _asteroids = Transformations.map(
         asteroidRadarDatabase.asteroidDao.getAllOrderedByCloseApproachDateASC()) {
         it.asDomainModel()
@@ -33,7 +34,6 @@ class MainViewModel(
 
     init {
         getPictureOfTheDay()
-        //getAsteroids()
     }
 
     private fun getPictureOfTheDay() {
