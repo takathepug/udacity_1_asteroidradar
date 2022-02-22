@@ -33,7 +33,7 @@ class MainViewModel(
 
     init {
         getPictureOfTheDay()
-        getAsteroids()
+        //getAsteroids()
     }
 
     private fun getPictureOfTheDay() {
@@ -41,25 +41,6 @@ class MainViewModel(
             val response = NasaApi.retrofitService.getPictureOfTheDay(Constants.API_KEY)
             Log.d(TAG, response.toString())
             _pictureOfDay.value = response
-        }
-    }
-
-    private fun getAsteroids() {
-
-        val calendar: Calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
-
-        val today = dateFormat.format(calendar.time)
-
-        calendar.add(Calendar.DATE, 7)
-        val nextSevenDay = dateFormat.format(calendar.time)
-
-        viewModelScope.launch {
-            try {
-                asteroidsRadarRepository.refreshAsteroids(today, nextSevenDay)
-            } catch (e: Exception) {
-                Log.i("TEST", e.toString())
-            }
         }
     }
 
