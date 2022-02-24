@@ -30,6 +30,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
             val now: Calendar = Calendar.getInstance()
             val todayAsString = dateFormat.format(now.time)
 
+            // get 7 days of asteroids
             now.add(Calendar.DATE, 7)
             val inSevenDaysAsString = dateFormat.format(now.time)
 
