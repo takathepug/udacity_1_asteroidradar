@@ -9,9 +9,11 @@ import androidx.room.Query
 @Dao
 interface AsteroidDao {
 
-    @Query("SELECT * FROM asteroid ORDER BY close_approach_date ASC")
+    // get all asteroids with close approach date starting today in ascending order
+    @Query("SELECT * FROM asteroid WHERE close_approach_date >= DATE('now') ORDER BY close_approach_date ASC")
     fun getAllOrderedByCloseApproachDateASC(): LiveData<List<DatabaseAsteroid>>
 
+    // upsert list of asteroids
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(asteroids: List<DatabaseAsteroid>)
 }
