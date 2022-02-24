@@ -10,23 +10,25 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/conslay_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/quarter_margin">
 
         <TextView
             android:id="@+id/textview_item_codename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/half_margin"
+            android:background="@android:color/black"
             android:text="@{asteroid.codename}"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/textview_item_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            android:textColor="@android:color/white"
-            android:background="@android:color/black"
             tools:text="Code Name" />
 
         <TextView
@@ -49,14 +51,15 @@
             android:id="@+id/imgview_item_is_hzd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/half_margin"
             android:background="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:statusIcon="@{asteroid.isPotentiallyHazardous}"
             app:statusContentDescription="@{asteroid.isPotentiallyHazardous}"
+            app:statusIcon="@{asteroid.isPotentiallyHazardous}"
             tools:src="@drawable/ic_status_potentially_hazardous" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

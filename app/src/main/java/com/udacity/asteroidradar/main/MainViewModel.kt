@@ -23,8 +23,10 @@ class MainViewModel(
     val pictureOfDay: LiveData<PictureOfDay>
         get() = _pictureOfDay
 
-    private val _asteroids = Transformations.map(
-        asteroidRadarDatabase.asteroidDao.getAllOrderedByCloseApproachDateASC()) {
+    // initial asteroids are all obtained from API via worker
+    private var _asteroids = Transformations.map(
+        asteroidRadarDatabase.asteroidDao.getAllOrderedByCloseApproachDateASC()
+    ) {
         it.asDomainModel()
     }
     val asteroids: LiveData<List<Asteroid>>
@@ -33,7 +35,6 @@ class MainViewModel(
 
     init {
         getPictureOfTheDay()
-        getAsteroids()
     }
 
     private fun getPictureOfTheDay() {
@@ -44,23 +45,9 @@ class MainViewModel(
         }
     }
 
-    private fun getAsteroids() {
+    // events
+    fun onShowTodayAsteroids() {
 
-        val calendar: Calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
-
-        val today = dateFormat.format(calendar.time)
-
-        calendar.add(Calendar.DATE, 7)
-        val nextSevenDay = dateFormat.format(calendar.time)
-
-        viewModelScope.launch {
-            try {
-                asteroidsRadarRepository.refreshAsteroids(today, nextSevenDay)
-            } catch (e: Exception) {
-                Log.i("TEST", e.toString())
-            }
-        }
     }
 
 }
