@@ -10,7 +10,7 @@ import androidx.room.Query
 interface AsteroidDao {
 
     // get all asteroids with close approach date starting today in ascending order
-    @Query("SELECT * FROM asteroid WHERE close_approach_date >= DATE('now') ORDER BY close_approach_date ASC")
+    @Query("SELECT * FROM asteroid ORDER BY close_approach_date ASC")
     fun getAllOrderedByCloseApproachDateASC(): LiveData<List<DatabaseAsteroid>>
 
     // get today asteroids

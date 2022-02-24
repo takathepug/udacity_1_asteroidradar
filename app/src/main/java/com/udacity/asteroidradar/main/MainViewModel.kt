@@ -46,8 +46,28 @@ class MainViewModel(
     }
 
     // events
-    fun onShowTodayAsteroids() {
+    fun onShowAllAsteroids() {
+        _asteroids = Transformations.map(
+            asteroidRadarDatabase.asteroidDao.getAllOrderedByCloseApproachDateASC()
+        ) {
+            it.asDomainModel()
+        }
+    }
 
+    fun onShowWeekAsteroids() {
+        _asteroids = Transformations.map(
+            asteroidRadarDatabase.asteroidDao.getWeekOrderedByCloseApproachDateASC()
+        ) {
+            it.asDomainModel()
+        }
+    }
+
+    fun onShowTodayAsteroids() {
+        _asteroids = Transformations.map(
+            asteroidRadarDatabase.asteroidDao.getToday()
+        ) {
+            it.asDomainModel()
+        }
     }
 
 }

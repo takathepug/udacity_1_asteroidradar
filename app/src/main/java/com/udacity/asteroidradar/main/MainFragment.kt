@@ -66,6 +66,13 @@ class MainFragment : Fragment() {
 
         when (item.itemId) {
             R.id.show_today_menu -> viewModel.onShowTodayAsteroids()
+            R.id.show_week_menu -> viewModel.onShowWeekAsteroids()
+            R.id.show_all_menu -> viewModel.onShowAllAsteroids()
+        }
+
+        // after a filter is applied we re-observe the list
+        viewModel.asteroids.observe(viewLifecycleOwner) {
+            asteroidAdapter.submitList(it)
         }
 
         return true

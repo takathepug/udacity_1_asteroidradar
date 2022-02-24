@@ -37,6 +37,7 @@ class AsteroidRadarRepository(private val db: AsteroidRadarDatabase) {
                 db.asteroidDao.insert(asteroidsList.asDomainModel())
             } catch (e: Exception) {
                 Log.e(TAG, e.toString())
+                e.printStackTrace()
             }
         }
     }
