@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
@@ -62,6 +62,12 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d(TAG, "Menu option $item clicked")
+
+        when (item.itemId) {
+            R.id.show_today_menu -> viewModel.onShowTodayAsteroids()
+        }
+
         return true
     }
 

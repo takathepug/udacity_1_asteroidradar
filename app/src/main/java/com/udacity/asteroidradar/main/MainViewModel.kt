@@ -24,8 +24,9 @@ class MainViewModel(
         get() = _pictureOfDay
 
     // initial asteroids are all obtained from API via worker
-    private val _asteroids = Transformations.map(
-        asteroidRadarDatabase.asteroidDao.getAllOrderedByCloseApproachDateASC()) {
+    private var _asteroids = Transformations.map(
+        asteroidRadarDatabase.asteroidDao.getAllOrderedByCloseApproachDateASC()
+    ) {
         it.asDomainModel()
     }
     val asteroids: LiveData<List<Asteroid>>
@@ -42,6 +43,11 @@ class MainViewModel(
             Log.d(TAG, response.toString())
             _pictureOfDay.value = response
         }
+    }
+
+    // events
+    fun onShowTodayAsteroids() {
+
     }
 
 }
